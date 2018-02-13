@@ -36,4 +36,20 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toEndOf="@+id/editText" />
 
+    <Button
+        android:id="@+id/bLogin"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
+        android:text="Login"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="58dp" />
+
+    <Button
+        android:id="@+id/bRegister"
+        android:layout_width="88dp"
+        android:layout_height="48dp"
+        android:text="Register"
+        app:layout_constraintTop_toBottomOf="@+id/bLogin"
+        tools:layout_editor_absoluteX="16dp" />
+
 </android.support.constraint.ConstraintLayout>

@@ -26,7 +26,8 @@
                 android:value=".MainActivity" />
         </activity>
         <activity android:name=".Login" />
-        <activity android:name=".Register"></activity>
+        <activity android:name=".Register" />
+        <activity android:name=".UserArea"></activity>
     </application>
 
 </manifest>
