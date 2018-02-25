@@ -2,4 +2,14 @@
     <string name="app_name">Actio</string>
     <string name="edit_message">Enter a message</string>
     <string name="button_send">Send</string>
+    <string name="activity_title_hint">Enter a title for the activity</string>
+    <string name="activity_title_label">Title</string>
+    <string name="activity_description_hint">Describe the activity</string>
+    <string name="activity_description_label">Description</string>
+    <string name="activity_location_hint">The location of the activity</string>
+    <string name="activity_location_label">Location</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
