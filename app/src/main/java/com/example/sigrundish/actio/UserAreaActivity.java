@@ -7,7 +7,7 @@
  import android.widget.EditText;
  import android.widget.TextView;
 
- public class UserArea extends AppCompatActivity {
+ public class UserAreaActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

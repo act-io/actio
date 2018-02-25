@@ -5,9 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-
-import java.net.Socket;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -22,11 +19,13 @@ public class MainActivity extends AppCompatActivity {
 
         final Button bLogin = (Button) findViewById(R.id.bLogin);
         final Button bRegister = (Button) findViewById(R.id.bRegister);
+        final Button bCreateActivity = (Button) findViewById(R.id.bCreateActivity);
+        final Button bActivities = (Button) findViewById(R.id.bActivities);
 
         bLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent loginIntent = new Intent(MainActivity.this, Login.class);
+                Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
                 MainActivity.this.startActivity(loginIntent);
             }
         });
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent registerIntent = new Intent(MainActivity.this, Register.class);
+                Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
                 MainActivity.this.startActivity(registerIntent);
 //                final Client socket1 = new Client("127.0.0.1", 1234);
 //                socket1.setClientCallback(new Client.ClientCallback () {
@@ -69,6 +68,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        bCreateActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent createActivityIntent = new Intent(MainActivity.this, ActivityActivity.class);
+                MainActivity.this.startActivity(createActivityIntent);
+            }
+        });
+
+        bActivities.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent activitiesIntent = new Intent(MainActivity.this, ActivityListActivity.class);
+                MainActivity.this.startActivity(activitiesIntent);
+            }
+        });
 
 
     }
