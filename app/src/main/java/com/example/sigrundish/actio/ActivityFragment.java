@@ -1,5 +1,6 @@
 package com.example.sigrundish.actio;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -10,9 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
-import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
 
 /**
  * Created by sigrundish on 25.2.2018.
@@ -23,11 +23,13 @@ public class ActivityFragment  extends Fragment {
     private EditText mTitleField;
     private EditText mDescriptionField;
     private EditText mLocationField;
+    private Button bCreateActivity;
 
     @Override
     public void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mActivity = new Activity();
+
     }
 
     @Override
@@ -64,7 +66,7 @@ public class ActivityFragment  extends Fragment {
             @Override
             public void onTextChanged(
                     CharSequence s, int start, int before, int count) {
-                mActivity.setTitle(s.toString());
+                mActivity.setDescription(s.toString());
             }
             @Override
             public void afterTextChanged(Editable s) {
@@ -83,7 +85,7 @@ public class ActivityFragment  extends Fragment {
             @Override
             public void onTextChanged(
                     CharSequence s, int start, int before, int count) {
-                mActivity.setTitle(s.toString());
+                mActivity.setLocation(s.toString());
             }
             @Override
             public void afterTextChanged(Editable s) {
@@ -91,6 +93,20 @@ public class ActivityFragment  extends Fragment {
             }
 
         });
+
+        bCreateActivity = (Button) v.findViewById(R.id.bCreateActivity);
+        bCreateActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //To do: Setja activity í töflu
+                System.out.println("Activity created!");
+                System.out.println("Titill: " + mActivity.getTitle());
+                System.out.println("Description: " + mActivity.getDescription());
+                System.out.println("Location: " + mActivity.getLocation());
+            }
+        });
         return v;
     }
+
+
 }
