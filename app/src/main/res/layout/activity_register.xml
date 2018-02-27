@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"/>
 
     <EditText
-        android:id="@+id/etAge"
+        android:id="@+id/etName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"/>
 
     <EditText
-        android:id="@+id/etName"
+        android:id="@+id/etAge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
