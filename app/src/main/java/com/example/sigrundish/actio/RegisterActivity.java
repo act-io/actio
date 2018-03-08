@@ -1,5 +1,6 @@
 package com.example.sigrundish.actio;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -38,9 +39,6 @@ public class RegisterActivity extends AppCompatActivity {
         bRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                System.out.println("takki");
-
                 HashMap<String, String> params = new HashMap<String,String>();
                 params.put("age", etAge.getText().toString()); // the entered data as the body.
                 params.put("name", etName.getText().toString()); // the entered data as the body.
@@ -62,11 +60,12 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 });
                 queue.add(jsObjRequest);
+                Intent LoginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+                RegisterActivity.this.startActivity(LoginIntent);
             }
         });
 
-                //Intent LoginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
-                //RegisterActivity.this.startActivity(LoginIntent);
+
 
             }
     }
