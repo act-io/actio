@@ -10,6 +10,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +30,9 @@ import java.util.List;
 public class ActivityListFragment extends Fragment {
     private RecyclerView mActivityRecyclerView;
     private ActivityAdapter mAdapter;
+    private ActivityLab activityLab ;
+    private List<Activity> activities = new ArrayList<>();
+    final String url ="https://actio-server.herokuapp.com/activities";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,11 +47,30 @@ public class ActivityListFragment extends Fragment {
     }
 
     private void updateUI() {
-        ActivityLab activityLab = ActivityLab.get(getActivity());
-        List<Activity> activities = activityLab.getActivities();
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        activityLab = ActivityLab.get(getActivity());
 
-        mAdapter = new ActivityAdapter(activities);
-        mActivityRecyclerView.setAdapter(mAdapter);
+        //Request list of activities stored in the database table 'activities'.
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            activities = activityLab.jsonArrayToActivityList(response.getJSONArray("data"));
+                            mAdapter = new ActivityAdapter(activities);
+                            mActivityRecyclerView.setAdapter(mAdapter);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // DisplayText.setText("That didn't work!");
+            }
+        });
+        queue.add(jsonObjectRequest);
     }
 
     private TextView mTitleTextView;
