@@ -9,36 +9,37 @@
 
     <!-- Layout to contain contents of main body of screen (drawer will slide over this) -->
 
-    <LinearLayout
-        android:id="@+id/content_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
-        <Button
-            android:id="@+id/bCreateActivity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:text="Create Activity"
-            app:layout_constraintTop_toBottomOf="@+id/bRegister"
-            />
 
-        <Button
-            android:id="@+id/bActivities"
+        <LinearLayout
+            android:id="@+id/content_frame"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:text="Show activities"
-            app:layout_constraintTop_toBottomOf="@+id/bCreateActivity"
-            />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+            <Button
+                android:id="@+id/bCreateActivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="Create Activity"
+                app:layout_constraintTop_toBottomOf="@+id/bRegister"
+                 />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/bActivities"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:text="Show activities"
+                app:layout_constraintTop_toBottomOf="@+id/bCreateActivity"
+                 />
+
+        </LinearLayout>
 
 
     />
