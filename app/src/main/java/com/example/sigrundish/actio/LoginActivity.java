@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         final TextView registerLink = (TextView) findViewById(R.id.tvRegisterHere);
 
         final RequestQueue queue = Volley.newRequestQueue(this);
-        final String url = "https://actio-server.herokuapp.com/users";
+        final String url = "https://actio-server.herokuapp.com/login";
 
         queue.start();
         bLogin.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 Intent registerIntent = new Intent(LoginActivity.this, RegisterActivity.class);
                 LoginActivity.this.startActivity(registerIntent);
+                finish();
             }
         });
     }

@@ -33,7 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
         final Button bRegister = (Button) findViewById(R.id.bRegister);
 
         final RequestQueue queue = Volley.newRequestQueue(this);
-        final String url = "http://10.0.2.2:3000/users";
+        final String url = "https://actio-server.herokuapp.com/users";
 
         queue.start();
         bRegister.setOnClickListener(new View.OnClickListener() {
