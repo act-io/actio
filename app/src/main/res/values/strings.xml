@@ -8,6 +8,7 @@
     <string name="activity_description_label">Description</string>
     <string name="activity_location_hint">The location of the activity</string>
     <string name="activity_location_label">Location</string>
+    <string name="welcomeMsg">Welcome to Actio!</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

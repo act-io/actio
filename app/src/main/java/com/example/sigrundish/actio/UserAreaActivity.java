@@ -16,7 +16,7 @@
 
         final EditText etUsername = (EditText) findViewById(R.id.etUsername);
         final EditText etAge = (EditText) findViewById(R.id.etAge);
-        final TextView welcomeMsg = (TextView) findViewById(R.id.tvWelcomeMsg);
+        final TextView welcomeMsg = (TextView) findViewById(R.id.welcomeMsg);
     }
 
 
