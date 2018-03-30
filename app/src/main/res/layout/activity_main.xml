@@ -26,22 +26,4 @@
         app:layout_constraintTop_toBottomOf="@+id/bLogin"
         tools:layout_editor_absoluteX="134dp" />
 
-    <Button
-        android:id="@+id/bCreateActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="Create Activity"
-        app:layout_constraintTop_toBottomOf="@+id/bRegister"
-        tools:layout_editor_absoluteX="134dp" />
-
-    <Button
-        android:id="@+id/bActivities"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:text="Show activities"
-        app:layout_constraintTop_toBottomOf="@+id/bCreateActivity"
-        tools:layout_editor_absoluteX="134dp" />
-
 </android.support.constraint.ConstraintLayout>
