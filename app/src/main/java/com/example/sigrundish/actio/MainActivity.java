@@ -19,9 +19,6 @@ public class MainActivity extends AppCompatActivity {
 
         final Button bLogin = (Button) findViewById(R.id.bLogin);
         final Button bRegister = (Button) findViewById(R.id.bRegister);
-        final Button bCreateActivity = (Button) findViewById(R.id.bCreateActivity);
-        final Button bActivities = (Button) findViewById(R.id.bActivities);
-
 
 
         bLogin.setOnClickListener(new View.OnClickListener() {
@@ -39,22 +36,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
                 MainActivity.this.startActivity(registerIntent);
 
-            }
-        });
-
-        bCreateActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent createActivityIntent = new Intent(MainActivity.this, ActivityActivity.class);
-                MainActivity.this.startActivity(createActivityIntent);
-            }
-        });
-
-        bActivities.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent activitiesIntent = new Intent(MainActivity.this, ActivityListActivity.class);
-                MainActivity.this.startActivity(activitiesIntent);
             }
         });
 
