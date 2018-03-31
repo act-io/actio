@@ -58,7 +58,9 @@
         android:id="@+id/bRegister"
         android:text="Register"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/background_light"/>
 
 </LinearLayout>
 
