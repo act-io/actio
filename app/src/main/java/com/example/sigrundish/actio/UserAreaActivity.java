@@ -13,10 +13,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class UserAreaActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
+    private User user = new User();
+    private String username = "";
 
 
 
@@ -29,6 +42,11 @@ public class UserAreaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_area);
         final Button bCreateActivity = (Button) findViewById(R.id.bCreateActivity);
         final Button bActivities = (Button) findViewById(R.id.bActivities);
+        final TextView greetingUser = (TextView) findViewById(R.id.tGreetUser);
+        String username = getIntent().getStringExtra("USERNAME");
+        setUser(username);
+        System.out.println("user.getName()" + user.getName());
+        greetingUser.setText(user.getName());
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -85,6 +103,43 @@ public class UserAreaActivity extends AppCompatActivity {
 
 
     }
+
+    private void setUser(String username) {
+        System.out.println("username in getUser" + username);
+        String url = "https://actio-server.herokuapp.com/users/" + username;
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        //Request list of activities stored in the database table 'activities'.
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                           JSONObject jsonUser = response.getJSONObject("data");
+                           user.setId(Integer.parseInt(jsonUser.getString("id")));
+                           user.setUsername(jsonUser.getString("username"));
+                           user.setPassword(jsonUser.getString("password"));
+                           user.setName(jsonUser.getString("name"));
+                           user.setAge(jsonUser.getString("age"));
+                            final TextView greetingUser = (TextView) findViewById(R.id.tGreetUser);
+                            greetingUser.setText("Hey " + user.getName() + "!");
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // DisplayText.setText("That didn't work!");
+            }
+        });
+        queue.add(jsonObjectRequest);
+    }
+
+
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
