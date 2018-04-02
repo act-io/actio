@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
                 HashMap<String, String> params = new HashMap<String,String>();
                 params.put("username", etUsername.getText().toString()); // the entered data as the body.
                 params.put("password", etPassword.getText().toString()); // the entered data as the body.
+                final String username = params.get("username");
                 JsonObjectRequest jsObjRequest = new
                         JsonObjectRequest(Request.Method.POST,
                         url,
@@ -50,11 +51,12 @@ public class LoginActivity extends AppCompatActivity {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                // DisplayText.setText(response.getString("message"));
                                 try {
                                     if(response.getBoolean("login")){
                                         Intent userAreaIntent = new Intent(LoginActivity.this, UserAreaActivity.class);
+                                        userAreaIntent.putExtra("USERNAME", username);
                                         LoginActivity.this.startActivity(userAreaIntent);
+
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();

@@ -21,23 +21,101 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/button_bg">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:drawableTop="@drawable/user_logo"
+                    android:paddingTop="30dp"
+                    android:layout_weight="0.4"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.6">
+
+
+                    <TextView
+                        android:id="@+id/tGreetUser"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.6"
+                        android:scaleHeight="1"
+                        android:text="@string/greetUser"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:id="@+id/tWelcomeUser"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:scaleHeight="1"
+                        android:text="Welcome to Actio!"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="24sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
             <Button
                 android:id="@+id/bCreateActivity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:text="Create Activity"
-                app:layout_constraintTop_toBottomOf="@+id/bRegister"
-                 />
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:background="@drawable/button_bg"
+                android:drawableLeft="@drawable/create_button"
+                android:drawableRight="@drawable/arrow_icon"
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:text="Create activity"
+                android:textAlignment="textStart"
+                android:textColor="@color/fontColor" />
 
             <Button
                 android:id="@+id/bActivities"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:text="Show activities"
-                app:layout_constraintTop_toBottomOf="@+id/bCreateActivity"
-                 />
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:background="@drawable/button_bg"
+                android:drawableLeft="@drawable/search_logo"
+                android:drawableRight="@drawable/arrow_icon"
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:text="View Activities"
+                android:textAlignment="textStart"
+                android:textColor="@color/fontColor" />
+
+            <Button
+                android:id="@+id/bAttendedActvities"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_gravity="fill"
+                android:background="@drawable/button_bg"
+                android:drawableLeft="@drawable/hiking_logo"
+                android:drawableRight="@drawable/arrow_icon"
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:text="Attended actvities"
+                android:textAlignment="textStart"
+                android:textColor="@color/fontColor" />
+
 
         </LinearLayout>
 
