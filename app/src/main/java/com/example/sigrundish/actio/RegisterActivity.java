@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -14,8 +15,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -26,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        final TextView tvValidation = (TextView) findViewById(R.id.tvValidation);
         final EditText etAge = (EditText) findViewById(R.id.etAge);
         final EditText etName = (EditText) findViewById(R.id.etName);
         final EditText etUsername = (EditText) findViewById(R.id.etUsername);
@@ -51,6 +56,24 @@ public class RegisterActivity extends AppCompatActivity {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
+                                try {
+                                if(!response.getBoolean("success")){
+                                    JSONArray jsonValidation = response.getJSONArray("validation");
+                                    if (jsonValidation != null) {
+                                        ArrayList<String> validationArray = new ArrayList<>();
+                                        for (int i=0;i<jsonValidation.length();i++){
+                                            JSONObject json = jsonValidation.getJSONObject(i);
+                                            validationArray.add(json.getString("error"));
+                                            tvValidation.setText(tvValidation.getText() + System.getProperty ("line.separator") + json.getString("error"));
+                                        }
+                                    }
+                                }
+                                else{
+                                    Intent LoginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                    RegisterActivity.this.startActivity(LoginIntent);}
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                                 // DisplayText.setText(response.getString("message"));
                             }
                         }, new Response.ErrorListener() {
@@ -60,8 +83,6 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 });
                 queue.add(jsObjRequest);
-                Intent LoginIntent = new Intent(RegisterActivity.this, LoginActivity.class);
-                RegisterActivity.this.startActivity(LoginIntent);
             }
         });
 

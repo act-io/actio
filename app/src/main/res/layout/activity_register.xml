@@ -9,6 +9,13 @@
     tools:context="com.example.sigrundish.actio.LoginActivity">
 
     <TextView
+        android:id="@+id/tvValidation"
+        android:layout_width="wrap_content"
+        android:text = ""
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark"/>
+
+    <TextView
         android:layout_width="wrap_content"
         android:text = "Name"
         android:layout_height="wrap_content"/>
