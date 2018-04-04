@@ -1,5 +1,6 @@
 package com.example.sigrundish.actio;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -104,6 +105,14 @@ public class ActivityListFragment extends Fragment {
             Toast.makeText(getActivity(),
                     mActivity.getTitle()+" clicked!",Toast.LENGTH_SHORT)
                     .show();
+            Intent infoIntent = new Intent(getActivity(), ActivityInfoActivity.class);
+            infoIntent.putExtra("Title", mActivity.getTitle());
+            infoIntent.putExtra("Description", mActivity.getDescription());
+            infoIntent.putExtra("Location", mActivity.getLocation());
+            infoIntent.putExtra("id", mActivity.getId());
+            startActivity(infoIntent);
+
+
         }
 
     }
