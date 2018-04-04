@@ -1,6 +1,5 @@
 package com.example.sigrundish.actio;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -9,9 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 
 import com.android.volley.Request;
@@ -35,7 +31,7 @@ public class ActivityFragment  extends Fragment {
     private EditText mDescriptionField;
     private EditText mLocationField;
     private Button bCreateActivity;
-    final String url = "http://actio-server.herokuapp.com/activities";
+    final String url = "https://actio-server.herokuapp.com/activities";
 
     @Override
     public void onCreate (Bundle savedInstanceState) {

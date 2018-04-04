@@ -101,7 +101,7 @@
                 android:textColor="@color/fontColor" />
 
             <Button
-                android:id="@+id/bAttendedActvities"
+                android:id="@+id/bAttendedActivities"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"

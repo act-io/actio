@@ -1,10 +1,13 @@
 package com.example.sigrundish.actio;
 
+import java.io.Serializable;
+
 /**
  * Created by sigrundish on 25/02/2018.
  */
 
-public class User {
+@SuppressWarnings("serial")
+public class User implements Serializable {
 
     private int mId;
     private String mName;

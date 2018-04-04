@@ -1,16 +1,12 @@
 package com.example.sigrundish.actio;
 
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.UUID;
-
 /**
  * Created by sigrundish on 25/02/2018.
  */
 
 public class Activity {
 
-    private UUID mId;
+    private int mId;
     private String mTitle;
     private String mDescription;
 //    private User mUser;
@@ -23,10 +19,10 @@ public class Activity {
 
 
     public Activity() {
-        mId = UUID.randomUUID();
+
     }
 
-    public UUID getId() {
+    public int getId() {
         return mId;
     }
 
@@ -49,6 +45,10 @@ public class Activity {
 //    public Date getDate() {
 //        return mDate;
 //    }
+
+    public void setId(int mId) {
+        this.mId = mId;
+    }
 
     public void setTitle(String mTitle) {
         this.mTitle = mTitle;

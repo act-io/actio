@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.sigrundish.actio.ActivityInfoActivity"
-    tools:showIn="@layout/activity_info">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <TextView
         android:id="@+id/tvActivity"
@@ -42,17 +44,6 @@
         app:layout_constraintStart_toEndOf="@+id/tvAttendees"
         tools:layout_editor_absoluteY="61dp" />
 
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="283dp"
-        android:gravity="bottom"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:context="com.example.sigrundish.actio.MapsActivity"
-        tools:layout_editor_absoluteX="0dp" />
-
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
@@ -60,4 +51,4 @@
         android:orientation="vertical"
         app:layout_constraintGuide_begin="20dp" />
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
