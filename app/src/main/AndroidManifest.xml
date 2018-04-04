@@ -22,7 +22,6 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -45,7 +44,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".ActivityActivity"
-            android:parentActivityName=".UserAreaActivity">
+            android:parentActivityName=".ActivityActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
@@ -60,7 +59,11 @@
         <activity
             android:name=".ActivityInfoActivity"
             android:label="@string/title_activity_info"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:parentActivityName=".ActivityInfoActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

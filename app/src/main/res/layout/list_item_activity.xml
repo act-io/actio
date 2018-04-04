@@ -42,17 +42,37 @@
         android:textColor="@color/colorPrimary" />
 </LinearLayout>
 
-    <Button
-        android:id="@+id/bAttend"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginRight="60dp"
         android:layout_weight="0.2"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:background="@drawable/button_bg">
+
+    <Button
+        android:id="@+id/bAttend"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_weight="1"
         android:background="@color/colorPrimary"
         android:orientation="vertical"
         android:text="Attend"
         android:textAllCaps="false"
         android:textColor="@android:color/background_light" />
+    <Button
+        android:id="@+id/bActivityInfo"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_weight="1"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:text="Info"
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_light" />
+    </LinearLayout>
 
 </LinearLayout>

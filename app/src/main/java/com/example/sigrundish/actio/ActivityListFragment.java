@@ -7,12 +7,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,8 +21,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
-import junit.framework.Assert;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -140,10 +137,11 @@ public class ActivityListFragment extends Fragment {
     private TextView mDescriptionTextView;
     private TextView mLocationTextView;
     private Button bAttend;
+    private Button bActivityInfo;
 
 
     private class ActivityHolder extends RecyclerView.ViewHolder
-            implements View.OnClickListener{
+         {
         private Activity mActivity;
 
         // itemView er public breyta í RecyclerView.ViewHolder
@@ -155,7 +153,35 @@ public class ActivityListFragment extends Fragment {
             mDescriptionTextView = (TextView) itemView.findViewById(R.id.activity_description);
             mLocationTextView = (TextView) itemView.findViewById(R.id.activity_location);
             bAttend = (Button) itemView.findViewById(R.id.bAttend);
-            bAttend.setOnClickListener(this);
+            bAttend.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    if(!onlyAttended){
+                        letUserAttendActivity();
+                        Toast.makeText(getActivity(),
+                                "You are now attending " + mActivity.getTitle()+"!",Toast.LENGTH_SHORT)
+                                .show();
+                    }
+                    else{
+                        letUserUnAttendActivity();
+                        Toast.makeText(getActivity(),
+                                "You are no longer attending " + mActivity.getTitle()+"!",Toast.LENGTH_SHORT)
+                                .show();
+
+                    }
+                }
+            });
+            bActivityInfo = (Button) itemView.findViewById(R.id.bActivityInfo);
+            bActivityInfo.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    Intent infoIntent = new Intent(getActivity(), ActivityInfoActivity.class);
+                    infoIntent.putExtra("Title", mActivity.getTitle());
+                    infoIntent.putExtra("Description", mActivity.getDescription());
+                    infoIntent.putExtra("Location", mActivity.getLocation());
+                    infoIntent.putExtra("id", mActivity.getId());
+                    ActivityListFragment.this.startActivity(infoIntent);
+                }
+            });
+
         }
         public void bind (Activity activity) {
             mActivity = activity;
@@ -223,34 +249,6 @@ public class ActivityListFragment extends Fragment {
                 }
             });
             queue.add(jsObjRequest);
-        }
-
-        @Override
-        public void onClick(View view) {
-            Toast.makeText(getActivity(),
-                    mActivity.getTitle()+" clicked!",Toast.LENGTH_SHORT)
-                    .show();
-            Intent infoIntent = new Intent(getActivity(), ActivityInfoActivity.class);
-            infoIntent.putExtra("Title", mActivity.getTitle());
-            infoIntent.putExtra("Description", mActivity.getDescription());
-            infoIntent.putExtra("Location", mActivity.getLocation());
-            infoIntent.putExtra("id", mActivity.getId());
-            startActivity(infoIntent);
-
-            if(!onlyAttended){
-                letUserAttendActivity();
-                Toast.makeText(getActivity(),
-                        "You are now attending " + mActivity.getTitle()+"!",Toast.LENGTH_SHORT)
-                        .show();
-            }
-            else{
-                letUserUnAttendActivity();
-                Toast.makeText(getActivity(),
-                        "You are no longer attending " + mActivity.getTitle()+"!",Toast.LENGTH_SHORT)
-                        .show();
-
-            }
-
         }
 
     }
