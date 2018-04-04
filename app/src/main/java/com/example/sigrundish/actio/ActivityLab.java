@@ -8,7 +8,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Klasi sem inniheldur mörg innbrot. Klasinn er factory klasi.
@@ -32,9 +31,9 @@ public class ActivityLab  {
         return mActivities;
     }
 
-    public Activity getActivity (UUID id) {
+    public Activity getActivity (int id) {
         for (Activity activity: mActivities) {
-            if (activity.getId().equals(id)) {
+            if (activity.getId()==id) {
                 return activity;
             }
         }
@@ -48,6 +47,7 @@ public class ActivityLab  {
             for (int i=0;i<jsonArray.length();i++){
                 JSONObject json = jsonArray.getJSONObject(i);
                 Activity activity = new Activity();
+                activity.setId(json.getInt("id"));
                 activity.setTitle(json.getString("title"));
                 activity.setDescription(json.getString("description"));
                 activity.setLocation(json.getString("location"));

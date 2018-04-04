@@ -53,10 +53,18 @@ public class LoginActivity extends AppCompatActivity {
                             public void onResponse(JSONObject response) {
                                 try {
                                     if(response.getBoolean("login")){
+                                        JSONObject jsonUser = response.getJSONObject("data");
+                                        System.out.println("jsonUser" + jsonUser);
+                                        User user = new User();
+                                        user.setId(jsonUser.getInt("id"));
+                                        user.setUsername(jsonUser.getString("username"));
+                                        user.setPassword(jsonUser.getString("password"));
+                                        user.setName(jsonUser.getString("name"));
+                                        user.setAge(jsonUser.getString("age"));
                                         Intent userAreaIntent = new Intent(LoginActivity.this, UserAreaActivity.class);
-                                        userAreaIntent.putExtra("USERNAME", username);
+                                        //Send the user to next activity.
+                                        userAreaIntent.putExtra("user", user);
                                         LoginActivity.this.startActivity(userAreaIntent);
-
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();

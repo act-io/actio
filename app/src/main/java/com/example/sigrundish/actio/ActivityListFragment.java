@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -39,7 +41,9 @@ public class ActivityListFragment extends Fragment {
     private ActivityAdapter mAdapter;
     private ActivityLab activityLab ;
     private List<Activity> activities = new ArrayList<>();
-    final String url ="https://actio-server.herokuapp.com/activities";
+    private User user = new User();
+    String url = "https://actio-server.herokuapp.com/activities";
+    Boolean onlyAttended = false;
 
 
     @Override
@@ -72,7 +76,8 @@ public class ActivityListFragment extends Fragment {
         });
         mActivityRecyclerView = (RecyclerView) view.findViewById(R.id.activity_recycler_view);
         mActivityRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
+        user = (User)getActivity().getIntent().getSerializableExtra("user");
+        onlyAttended = Boolean.valueOf(getActivity().getIntent().getStringExtra("ONLY_ATTENDED"));
         updateUI();
         return view;
     }
@@ -94,10 +99,20 @@ public class ActivityListFragment extends Fragment {
 
 
     private void updateUI() {
+        if(onlyAttended){
+            //Request what activities the user has attended to.
+            int userId = user.getId();
+            url = "https://actio-server.herokuapp.com/usersAttendingActivity/" + userId;
+        }
+        setActivities();
+
+    }
+
+    private void setActivities(){
+
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         activityLab = ActivityLab.get(getActivity());
 
-        //Request list of activities stored in the database table 'activities'.
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -118,11 +133,13 @@ public class ActivityListFragment extends Fragment {
             }
         });
         queue.add(jsonObjectRequest);
+
     }
 
     private TextView mTitleTextView;
     private TextView mDescriptionTextView;
     private TextView mLocationTextView;
+    private Button bAttend;
 
 
     private class ActivityHolder extends RecyclerView.ViewHolder
@@ -133,17 +150,79 @@ public class ActivityListFragment extends Fragment {
 
         public ActivityHolder (LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_activity, parent, false));
-            itemView.setOnClickListener(this);
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.activity_title);
             mDescriptionTextView = (TextView) itemView.findViewById(R.id.activity_description);
             mLocationTextView = (TextView) itemView.findViewById(R.id.activity_location);
+            bAttend = (Button) itemView.findViewById(R.id.bAttend);
+            bAttend.setOnClickListener(this);
         }
         public void bind (Activity activity) {
             mActivity = activity;
             mTitleTextView.setText(mActivity.getTitle());
             mDescriptionTextView.setText(mActivity.getDescription());
             mLocationTextView.setText(mActivity.getLocation());
+            if(onlyAttended){
+                bAttend.setText("Not going");
+            }
+            else{
+                bAttend.setText("Attend");
+            }
+
+        }
+
+        private void letUserAttendActivity(){
+            String url = "https://actio-server.herokuapp.com/usersattendingactivity";
+            RequestQueue queue = Volley.newRequestQueue(getActivity());
+            // Inserts userId and activityId into the usersattendingactivity table.
+            queue.start();
+            HashMap<String, String> params = new HashMap<String,String>();
+            params.put("userId", String.valueOf(user.getId())); // the entered data as the body.
+            params.put("activityId", String.valueOf(mActivity.getId())); // the entered data as the body.
+            JsonObjectRequest jsObjRequest = new
+                    JsonObjectRequest(Request.Method.POST,
+                    url,
+                    new JSONObject(params),
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            // DisplayText.setText(response.getString("message"));
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    // DisplayText.setText("That didn't work!");
+                }
+            });
+            queue.add(jsObjRequest);
+        }
+
+        private void letUserUnAttendActivity(){
+            String userId = String.valueOf(user.getId());
+            String activityId = String.valueOf(mActivity.getId());
+            String url = "https://actio-server.herokuapp.com/usersattendingactivity/" + userId + "&" + activityId;
+            RequestQueue queue = Volley.newRequestQueue(getActivity());
+            // Inserts userId and activityId into the usersattendingactivity table.
+            queue.start();
+            HashMap<String, String> params = new HashMap<String,String>();
+            params.put("userId", userId); // the entered data as the body.
+            params.put("activityId",activityId); // the entered data as the body.
+            JsonObjectRequest jsObjRequest = new
+                    JsonObjectRequest(Request.Method.DELETE,
+                    url,
+                    new JSONObject(params),
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            // DisplayText.setText(response.getString("message"));
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    // DisplayText.setText("That didn't work!");
+                }
+            });
+            queue.add(jsObjRequest);
         }
 
         @Override
@@ -158,6 +237,19 @@ public class ActivityListFragment extends Fragment {
             infoIntent.putExtra("id", mActivity.getId());
             startActivity(infoIntent);
 
+            if(!onlyAttended){
+                letUserAttendActivity();
+                Toast.makeText(getActivity(),
+                        "You are now attending " + mActivity.getTitle()+"!",Toast.LENGTH_SHORT)
+                        .show();
+            }
+            else{
+                letUserUnAttendActivity();
+                Toast.makeText(getActivity(),
+                        "You are no longer attending " + mActivity.getTitle()+"!",Toast.LENGTH_SHORT)
+                        .show();
+
+            }
 
         }
 
@@ -185,7 +277,6 @@ public class ActivityListFragment extends Fragment {
         public int getItemCount() {
             return mActivities.size();
         }
-
 
         public void filterList(ArrayList<Activity> filteredList) {
             mActivities = filteredList;
