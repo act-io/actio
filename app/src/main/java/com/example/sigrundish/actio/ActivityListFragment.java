@@ -4,9 +4,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +20,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+
+import junit.framework.Assert;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,17 +40,57 @@ public class ActivityListFragment extends Fragment {
     private List<Activity> activities = new ArrayList<>();
     final String url ="https://actio-server.herokuapp.com/activities";
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_activity_list, container, false);
+        EditText etsearchActivity = view.findViewById(R.id.etSearchActivity);
 
+        etsearchActivity.clearFocus();
+
+        etsearchActivity.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int i, int i1, int i2) {
+                if(s.length()==0){
+                    mAdapter.resetList();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+
+
+            }
+        });
         mActivityRecyclerView = (RecyclerView) view.findViewById(R.id.activity_recycler_view);
         mActivityRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         updateUI();
         return view;
     }
+    private void filter(String text1){
+        ArrayList<Activity> filteredList = new ArrayList<>();
+
+        for (Activity item : activities) {
+            if (item.getTitle().toLowerCase().contains(text1.toLowerCase())) {
+                filteredList.add(item);
+
+            }
+            else if(item.getLocation().toLowerCase().contains(text1.toLowerCase())){
+                filteredList.add(item);
+            }
+        }
+
+        mAdapter.filterList(filteredList);
+    }
+
 
     private void updateUI() {
         RequestQueue queue = Volley.newRequestQueue(getActivity());
@@ -109,8 +155,10 @@ public class ActivityListFragment extends Fragment {
     }
     private class ActivityAdapter extends RecyclerView.Adapter<ActivityHolder> {
         private List<Activity> mActivities;
+        private List<Activity> mActivitiesOriginal;
         public ActivityAdapter(List<Activity> activities) {
             mActivities = activities;
+            mActivitiesOriginal = activities;
         }
         @Override
         public ActivityHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -119,9 +167,10 @@ public class ActivityListFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder (ActivityHolder holder, int position) {
+        public void onBindViewHolder ( ActivityHolder holder,  int position) {
             Activity activity = mActivities.get(position);
             holder.bind(activity);
+            holder.setIsRecyclable(false);
         }
         @Override
         public int getItemCount() {
@@ -129,5 +178,13 @@ public class ActivityListFragment extends Fragment {
         }
 
 
+        public void filterList(ArrayList<Activity> filteredList) {
+            mActivities = filteredList;
+            notifyDataSetChanged();
+        }
+        public void resetList(){
+            mActivities = mActivitiesOriginal;
+            notifyDataSetChanged();
+        }
     }
 }
