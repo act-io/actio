@@ -67,8 +67,6 @@ public class ActivityListFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
                 filter(s.toString());
-
-
             }
         });
         mActivityRecyclerView = (RecyclerView) view.findViewById(R.id.activity_recycler_view);
@@ -166,8 +164,8 @@ public class ActivityListFragment extends Fragment {
                         Toast.makeText(getActivity(),
                                 "You are no longer attending " + mActivity.getTitle()+"!",Toast.LENGTH_SHORT)
                                 .show();
-
                     }
+
                 }
             });
             bActivityInfo = (Button) itemView.findViewById(R.id.bActivityInfo);
@@ -241,6 +239,7 @@ public class ActivityListFragment extends Fragment {
                         @Override
                         public void onResponse(JSONObject response) {
                             // DisplayText.setText(response.getString("message"));
+                            updateUI();
                         }
                     }, new Response.ErrorListener() {
                 @Override
