@@ -175,7 +175,7 @@ public class ActivityListFragment extends Fragment {
                     infoIntent.putExtra("Title", mActivity.getTitle());
                     infoIntent.putExtra("Description", mActivity.getDescription());
                     infoIntent.putExtra("Location", mActivity.getLocation());
-                    infoIntent.putExtra("id", mActivity.getId());
+                    infoIntent.putExtra("id", String.valueOf(mActivity.getId()));
                     ActivityListFragment.this.startActivity(infoIntent);
                 }
             });
