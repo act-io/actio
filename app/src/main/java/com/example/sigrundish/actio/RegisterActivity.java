@@ -49,6 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
                 params.put("name", etName.getText().toString()); // the entered data as the body.
                 params.put("username", etUsername.getText().toString()); // the entered data as the body.
                 params.put("password", etPassword.getText().toString()); // the entered data as the body.
+                tvValidation.setText("");
                 JsonObjectRequest jsObjRequest = new
                         JsonObjectRequest(Request.Method.POST,
                         url,

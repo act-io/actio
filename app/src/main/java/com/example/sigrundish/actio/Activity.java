@@ -1,7 +1,8 @@
 package com.example.sigrundish.actio;
 
 /**
- * Created by sigrundish on 25/02/2018.
+ * Model class for Activity.
+ * Created by teymi 8 on 25/02/2018.
  */
 
 public class Activity {
@@ -9,9 +10,9 @@ public class Activity {
     private int mId;
     private String mTitle;
     private String mDescription;
+    private String mLocation;
 //    private User mUser;
 //    private List<User> mGuests;
-    private String mLocation;
 //    private LocalDateTime mBeginTime;
 //    private LocalDateTime mEndTime;
 //    private Date mDate;
@@ -19,8 +20,9 @@ public class Activity {
 
 
     public Activity() {
-
     }
+
+    // Getters and setters.
 
     public int getId() {
         return mId;
