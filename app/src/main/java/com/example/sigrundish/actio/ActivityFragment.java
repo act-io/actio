@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -44,10 +44,10 @@ public class ActivityFragment  extends Fragment   {
     private EditText mLocationField;
     private Button bCreateActivity;
 
-    private Button btDate,btStartTime,btEndTime;
+    private Button btStartDate,btEndDate,btStartTime,btEndTime;
     private Calendar calendar;
-    private TextView twStartTime,twEndTime,twDate;
-    private int startHour, startMinute,endHour,endMinute,yearA,monthA,dayA;
+    private TextView twStartTime,twEndTime,twStartDate,twEndDate;
+    private int startHour, startMinute,endHour,endMinute, startYear, startMonth, startDay,endYear,endMonth,endDay;
     private Date startTime,endTime;
     final String url = "http://actio-server.herokuapp.com/activities";
 
@@ -69,12 +69,13 @@ public class ActivityFragment  extends Fragment   {
         startMinute = calendar.get(Calendar.MINUTE);
         endHour = calendar.get(Calendar.HOUR_OF_DAY);
         endMinute  = calendar.get(Calendar.MINUTE);
-        yearA = calendar.get(Calendar.YEAR);
-        monthA = calendar.get(Calendar.MONTH);
-        dayA =  calendar.get(Calendar.DAY_OF_MONTH);
+        startYear = calendar.get(Calendar.YEAR);
+        startMonth = calendar.get(Calendar.MONTH);
+        startDay =  calendar.get(Calendar.DAY_OF_MONTH);
         twStartTime = (TextView) v.findViewById(R.id.twStartTime);
         twEndTime =(TextView) v.findViewById(R.id.twEndTime);
-        twDate = (TextView) v.findViewById(R.id.twDate);
+        twStartDate = (TextView) v.findViewById(R.id.twStartDate);
+        twEndDate = (TextView) v.findViewById(R.id.twEndDate);
 
 
 
@@ -171,21 +172,38 @@ public class ActivityFragment  extends Fragment   {
             }
         });
 
-        btDate = (Button) v.findViewById(R.id.btDate);
+        btStartDate = (Button) v.findViewById(R.id.btStartDate);
 
-        btDate.setOnClickListener(new View.OnClickListener() {
+        btStartDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatePickerDialog dialog3 =  new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        yearA = i;
-                        monthA = i1;
-                        dayA = i2;
-                        twDate.setText("Date is : " + dayA + "." + (monthA+1) + "."  + yearA);
+                        startYear = i;
+                        startMonth = i1;
+                        startDay = i2;
+                        twStartDate.setText("The starting date is : " + startDay + "." + (startMonth +1) + "."  + startYear);
                     }
-                },yearA,monthA,dayA);
+                }, startYear, startMonth, startDay);
                 dialog3.show();
+            }
+        });
+        btEndDate = (Button) v.findViewById(R.id.btEndDate);
+        btEndDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog dialog3 =  new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                        endYear = i;
+                        endMonth = i1;
+                        endDay = i2;
+                        twEndDate.setText("The ending date is : " + endDay + "." + (endMonth +1) + "."  + endYear);
+                    }
+                }, startYear, startMonth, startDay);
+                dialog3.show();
+
             }
         });
 
@@ -194,10 +212,16 @@ public class ActivityFragment  extends Fragment   {
         bCreateActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startTime = new Date((yearA-1900),monthA,dayA,startHour,startMinute);
+                startTime = new Date((startYear -1900), startMonth, startDay,startHour,startMinute);
                 mActivity.setStartTime(startTime);
-                endTime = new Date((yearA-1900),monthA,dayA,endHour,endHour);
+                endTime = new Date((endYear -1900), endMonth, endDay,endHour,endHour);
                 mActivity.setEndTime(endTime);
+                if(endTime.before(startTime)){
+                    Toast.makeText(getActivity(),
+                            "The activity can not end before it starts",Toast.LENGTH_SHORT)
+                            .show();
+                }
+                else{
                 DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm");
                 RequestQueue queue = Volley.newRequestQueue(getActivity());
                 queue.start();
@@ -224,7 +248,7 @@ public class ActivityFragment  extends Fragment   {
                 });
                 queue.add(jsObjRequest);
 
-            }
+            }}
         });
 
 //        public void showTimePickerDialog(View v) {

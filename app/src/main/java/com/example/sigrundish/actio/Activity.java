@@ -20,7 +20,6 @@ public class Activity {
     private String mDescription;
     private String mLocation;
 
-    private String mLocation;
     private Date startTime;
     private Date endTime;
 
