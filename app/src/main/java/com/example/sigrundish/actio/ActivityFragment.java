@@ -3,6 +3,7 @@ package com.example.sigrundish.actio;
 
 import android.app.TimePickerDialog;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -43,6 +44,7 @@ public class ActivityFragment  extends Fragment   {
     private EditText mDescriptionField;
     private EditText mLocationField;
     private Button bCreateActivity;
+    private User user;
 
     private Button btStartDate,btEndDate,btStartTime,btEndTime;
     private Calendar calendar;
@@ -64,6 +66,7 @@ public class ActivityFragment  extends Fragment   {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_activity, container, false);
         calendar = Calendar.getInstance();
+        user = (User)getActivity().getIntent().getSerializableExtra("user");
 
         startHour = calendar.get(Calendar.HOUR_OF_DAY);
         startMinute = calendar.get(Calendar.MINUTE);
@@ -247,6 +250,11 @@ public class ActivityFragment  extends Fragment   {
                     }
                 });
                 queue.add(jsObjRequest);
+                    Intent userAreaIntent = new Intent(getActivity(), UserAreaActivity.class);
+                    //Send the user to next activity.
+                    userAreaIntent.putExtra("user", user);
+                    getActivity().startActivity(userAreaIntent);
+
 
             }}
         });

@@ -77,6 +77,7 @@ public class UserAreaActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent createActivityIntent = new Intent(UserAreaActivity.this, ActivityActivity.class);
+                createActivityIntent.putExtra("user", user);
                 UserAreaActivity.this.startActivity(createActivityIntent);
             }
         });
