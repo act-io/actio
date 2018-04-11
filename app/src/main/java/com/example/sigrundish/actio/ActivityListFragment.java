@@ -25,6 +25,9 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -119,6 +122,8 @@ public class ActivityListFragment extends Fragment {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                        } catch (ParseException e) {
+                            e.printStackTrace();
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -176,7 +181,12 @@ public class ActivityListFragment extends Fragment {
                     infoIntent.putExtra("Description", mActivity.getDescription());
                     infoIntent.putExtra("Location", mActivity.getLocation());
                     infoIntent.putExtra("id", String.valueOf(mActivity.getId()));
+                    DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+                    infoIntent.putExtra("startTime",df.format(mActivity.getStartTime()));
+                    infoIntent.putExtra("endTime", df.format(mActivity.getEndTime()));
                     ActivityListFragment.this.startActivity(infoIntent);
+
                 }
             });
 

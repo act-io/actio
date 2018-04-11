@@ -1,11 +1,8 @@
 package com.example.sigrundish.actio;
 
 
-import android.app.DatePickerDialog;
-
-import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.UUID;
 
 
 /**
@@ -23,6 +20,14 @@ public class Activity {
     private Date startTime;
     private Date endTime;
 
+
+
+
+    public Activity() {
+    }
+
+    // Getters and setters.
+
     public Date getStartTime() {
         return startTime;
     }
@@ -38,14 +43,8 @@ public class Activity {
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
-    
 
-
-
-    public Activity() {
-    }
-
-    // Getters and setters.
+    public String dateToString(Date date){ return  new SimpleDateFormat("yyyy/MM/dd HH:mm").format(date); }
 
     public int getId() {
         return mId;

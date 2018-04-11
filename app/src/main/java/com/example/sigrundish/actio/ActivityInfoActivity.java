@@ -41,13 +41,21 @@ public class ActivityInfoActivity extends AppCompatActivity implements OnMapRead
         final TextView description = findViewById(R.id.tvInfo);
         final TextView locale = findViewById(R.id.tvLocation);
         final TextView attendees = findViewById(R.id.tvAttendees);
+        final TextView startTime = findViewById(R.id.tvStartTime);
+        final TextView endTime = findViewById(R.id.tvEndTime);
 
 
         title.setText(getIntent().getStringExtra("Title"));
         description.setText(getIntent().getStringExtra("Description"));
+        startTime.setText("Start time: " + getIntent().getStringExtra("startTime"));
+        endTime.setText("End time: " + getIntent().getStringExtra("endTime"));
+
+
+
 
         String activityId = getIntent().getStringExtra("id");
         String location = getIntent().getStringExtra("Location");
+
 
         locale.setText(location);
 

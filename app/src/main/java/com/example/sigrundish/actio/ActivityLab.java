@@ -6,7 +6,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,7 +43,7 @@ public class ActivityLab  {
         return null;
     }
 
-    public List<Activity> jsonArrayToActivityList(JSONArray jsonArray) throws JSONException {
+    public List<Activity> jsonArrayToActivityList(JSONArray jsonArray) throws JSONException, ParseException {
         mActivities = new ArrayList<>();
 
         if (jsonArray != null) {
@@ -51,6 +54,22 @@ public class ActivityLab  {
                 activity.setTitle(json.getString("title"));
                 activity.setDescription(json.getString("description"));
                 activity.setLocation(json.getString("location"));
+
+                String dateStr = json.getString("starttime");
+                dateStr = dateStr.replace("T", " ");
+                dateStr = dateStr.substring(0,16);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                Date startTime = sdf.parse(dateStr);
+                activity.setStartTime(startTime);
+
+                String dateStr1 = json.getString("endtime");
+                dateStr1 = dateStr1.replace("T", " ");
+                dateStr1 = dateStr1.substring(0,16);
+                Date endTime = sdf.parse(dateStr1);
+                activity.setEndTime(endTime);
+
+
+
                 mActivities.add(activity);
             }
         }
