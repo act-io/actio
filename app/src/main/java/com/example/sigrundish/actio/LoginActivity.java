@@ -15,9 +15,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity {
@@ -27,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        final TextView tvLoginValidation = (TextView) findViewById(R.id.tvLoginValidation);
         final EditText etUsername = (EditText) findViewById(R.id.etUsername);
         final EditText etPassword = (EditText) findViewById(R.id.etPassword);
         final Button bLogin = (Button) findViewById(R.id.bLogin);
@@ -53,10 +56,25 @@ public class LoginActivity extends AppCompatActivity {
                             public void onResponse(JSONObject response) {
                                 try {
                                     if(response.getBoolean("login")){
+                                        JSONObject jsonUser = response.getJSONObject("data");
+                                        User user = new User();
+                                        user.setId(jsonUser.getInt("id"));
+                                        user.setUsername(jsonUser.getString("username"));
+                                        user.setPassword(jsonUser.getString("password"));
+                                        user.setName(jsonUser.getString("name"));
+                                        user.setAge(jsonUser.getString("age"));
                                         Intent userAreaIntent = new Intent(LoginActivity.this, UserAreaActivity.class);
-                                        userAreaIntent.putExtra("USERNAME", username);
+                                        //Send the user to next activity.
+                                        userAreaIntent.putExtra("user", user);
                                         LoginActivity.this.startActivity(userAreaIntent);
-
+                                    }
+                                    else{
+                                        JSONArray jsonValidation = response.getJSONArray("validation");
+                                        if (jsonValidation != null) {
+                                            ArrayList<String> validationArray = new ArrayList<>();
+                                            JSONObject json = jsonValidation.getJSONObject(0);
+                                            tvLoginValidation.setText(json.getString("error"));
+                                        }
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();

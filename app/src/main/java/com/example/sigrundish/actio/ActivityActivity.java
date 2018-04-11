@@ -6,7 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 /**
- * Created by sigrundish on 25/02/2018.
+ * Activity class for Activity
+ * Created by teymi 8 on 25/02/2018.
  */
 
 public class ActivityActivity extends AppCompatActivity {

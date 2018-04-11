@@ -8,6 +8,14 @@
     android:padding="10dp"
     tools:context="com.example.sigrundish.actio.LoginActivity">
 
+
+    <TextView
+        android:id="@+id/tvLoginValidation"
+        android:layout_width="wrap_content"
+        android:text = ""
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

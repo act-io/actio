@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#FF383E</color>
     <color name="colorAccent">#95abd8</color>
     <color name="fontColor">#606060</color>
+    <color name="pastelYellow">#fdfd96 </color>
+    <color name="carryYellow">#FFC857 </color>
 </resources>

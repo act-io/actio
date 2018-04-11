@@ -91,6 +91,8 @@
         android:id="@+id/bCreateActivity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create Activity" />
+        android:text="Create Activity"
+        android:background="@color/colorPrimary"
+        android:textColor="@android:color/background_light"/>
 
 </LinearLayout>

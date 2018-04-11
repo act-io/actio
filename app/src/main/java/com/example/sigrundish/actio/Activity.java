@@ -1,22 +1,25 @@
 package com.example.sigrundish.actio;
 
+
 import android.app.DatePickerDialog;
 
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
+
 /**
- * Created by sigrundish on 25/02/2018.
+ * Model class for Activity.
+ * Created by teymi 8 on 25/02/2018.
  */
 
 public class Activity {
 
-    private UUID mId;
+    private int mId;
     private String mTitle;
     private String mDescription;
-//    private User mUser;
-//    private List<User> mGuests;
+    private String mLocation;
+
     private String mLocation;
     private Date startTime;
     private Date endTime;
@@ -36,17 +39,16 @@ public class Activity {
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
-    //    private LocalDateTime mBeginTime;
-//    private LocalDateTime mEndTime;
-//    private Date mDate;
-//    private List<Interest> mRelatedInterests;
+    
+
 
 
     public Activity() {
-        mId = UUID.randomUUID();
     }
 
-    public UUID getId() {
+    // Getters and setters.
+
+    public int getId() {
         return mId;
     }
 
@@ -69,6 +71,10 @@ public class Activity {
 //    public Date getDate() {
 //        return mDate;
 //    }
+
+    public void setId(int mId) {
+        this.mId = mId;
+    }
 
     public void setTitle(String mTitle) {
         this.mTitle = mTitle;

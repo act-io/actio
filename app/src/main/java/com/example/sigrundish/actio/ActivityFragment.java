@@ -1,5 +1,6 @@
 package com.example.sigrundish.actio;
 
+
 import android.app.TimePickerDialog;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -41,12 +43,14 @@ public class ActivityFragment  extends Fragment   {
     private EditText mDescriptionField;
     private EditText mLocationField;
     private Button bCreateActivity;
+
     private Button btDate,btStartTime,btEndTime;
     private Calendar calendar;
     private TextView twStartTime,twEndTime,twDate;
     private int startHour, startMinute,endHour,endMinute,yearA,monthA,dayA;
     private Date startTime,endTime;
     final String url = "http://actio-server.herokuapp.com/activities";
+
 
     @Override
     public void onCreate (Bundle savedInstanceState) {
