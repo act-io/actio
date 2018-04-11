@@ -40,6 +40,52 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:hint="@string/activity_location_hint" />
+    <TextView
+        android:id="@+id/twStartTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:id="@+id/twEndTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:id="@+id/twDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <Button
+        android:id="@+id/btStartTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Choose Starting Time"
+        />
+    <Button
+        android:id="@+id/btEndTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Choose Ending Time"
+        />
+    <Button
+        android:id="@+id/btDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Choose a Date"
+        />
+
+    <!--<DatePicker-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/dtDate"-->
+        <!--android:scaleY="0.5"-->
+        <!--android:scaleX="0.50"></DatePicker>-->
+    <!--<TimePicker-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/dtTime"-->
+        <!--android:scaleY="0.5"-->
+        <!--android:scaleX="0.50"></TimePicker>-->
 
     <Button
         android:id="@+id/bCreateActivity"

@@ -1,5 +1,13 @@
 package com.example.sigrundish.actio;
 
+
+import android.app.DatePickerDialog;
+
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.UUID;
+
+
 /**
  * Model class for Activity.
  * Created by teymi 8 on 25/02/2018.
@@ -11,12 +19,28 @@ public class Activity {
     private String mTitle;
     private String mDescription;
     private String mLocation;
-//    private User mUser;
-//    private List<User> mGuests;
-//    private LocalDateTime mBeginTime;
-//    private LocalDateTime mEndTime;
-//    private Date mDate;
-//    private List<Interest> mRelatedInterests;
+
+    private String mLocation;
+    private Date startTime;
+    private Date endTime;
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+    
+
 
 
     public Activity() {
