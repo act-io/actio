@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
     //Your key is a public constant EXTRA_MESSAGE because the next activity uses the key to retrieve the text value.
     //It's a good practice to define keys for intent extras using your app's package name as a prefix.
     public static final String EXTRA_MESSAGE = "com.example.sigrundish.actio.MESSAGE";

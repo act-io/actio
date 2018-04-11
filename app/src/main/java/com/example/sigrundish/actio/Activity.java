@@ -1,5 +1,7 @@
 package com.example.sigrundish.actio;
 
+import android.app.DatePickerDialog;
+
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
@@ -16,7 +18,25 @@ public class Activity {
 //    private User mUser;
 //    private List<User> mGuests;
     private String mLocation;
-//    private LocalDateTime mBeginTime;
+    private Date startTime;
+    private Date endTime;
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+    //    private LocalDateTime mBeginTime;
 //    private LocalDateTime mEndTime;
 //    private Date mDate;
 //    private List<Interest> mRelatedInterests;
